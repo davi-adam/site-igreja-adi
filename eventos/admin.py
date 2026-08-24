@@ -6,3 +6,16 @@ class EventoAdmin(admin.ModelAdmin):
     list_display = ('titulo', 'data_inicio', 'data_fim', 'local', 'vagas_maximas')
     search_fields = ('titulo', 'local')
     list_filter = ('data_inicio',)
+    ordering = ('data_inicio',)
+    date_hierarchy = 'data_inicio'
+    fieldsets = (
+        ('Informações do Evento', {
+            'fields': ('titulo', 'descricao')
+        }),
+        ('Data e Local', {
+            'fields': ('data_inicio', 'data_fim', 'local')
+        }),
+        ('Inscrições', {
+            'fields': ('vagas_maximas',)
+        }),
+    )
