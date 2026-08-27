@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Calendário de Eventos{% endblock %}
+{% block content %}
+<h1>Calendário de Eventos</h1>
+<div id="calendar-loading" class="text-center my-3">Carregando eventos...</div>
+<div id="calendar"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var loadingEl = document.getElementById('calendar-loading');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale: 'pt-br',
+        events: '/eventos/json/',
+        loading: function(isLoading) {
+            loadingEl.style.display = isLoading ? 'block' : 'none';
+        },
+        eventDidMount: function(info) {
+            info.el.setAttribute('title', 'Local: ' + info.event.extendedProps.local);
+        }
+    });
+    calendar.render();
+});
+</script>
+{% endblock %}
