@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Evento
 import logging
 
@@ -14,6 +14,13 @@ CORES = {
 def calendario(request):
    return render(request, 'calendario.html')
 
+def detalhe_evento(request, evento_id):
+    evento = get_object_or_404(Evento, id=evento_id)
+
+    return render(request, 'detalhe_evento.html', {
+        'evento': evento
+    })
+
 def eventos_json(request):
     try:
         eventos = Evento.objects.all()
@@ -22,8 +29,9 @@ def eventos_json(request):
                 'id': e.id,
                 'title': e.titulo,
                 'start': e.data_inicio.isoformat(),
-                'end': e.data_fim.isoformat(),
+                'end': e.data_fim.isoformat(),  
                 'color': CORES.get(e.categoria, '#73726c'),
+                'url': f'/eventos/{e.id}/',
                 'extendedProps': {'local': e.local},
             }
             for e in eventos

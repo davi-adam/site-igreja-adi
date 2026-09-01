@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}{{ evento.titulo }}{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h1 class="card-title mb-3">
+                    {{ evento.titulo }}
+                </h1>
+                <span class="badge text-bg-secondary mb-4">
+                    {{ evento.get_categoria_display }}
+                </span>
+                <h5>Descrição</h5>
+                <p>
+                    {{ evento.descricao|default:"Nenhuma descrição informada." }}
+                </p>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <strong>Início</strong>
+                        <p class="mb-0">
+                            {{ evento.data_inicio|date:"d/m/Y H:i" }}
+                        </p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Término</strong>
+                        <p class="mb-0">
+                            {{ evento.data_fim|date:"d/m/Y H:i" }}
+                        </p>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <strong>Local</strong>
+                    <p>{{ evento.local }}</p>
+                </div>
+                {% if evento.vagas_maximas %}
+                    <div class="mb-3">
+                        <strong>Vagas disponíveis</strong>
+                        <p>{{ evento.vagas_maximas }}</p>
+                    </div>
+                {% endif %}
+                <a href="/eventos/" class="btn btn-outline-secondary">
+                    Voltar ao calendário
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

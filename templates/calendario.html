@@ -1,10 +1,22 @@
 {% extends "base.html" %}
 {% block title %}Calendário de Eventos{% endblock %}
 {% block content %}
-<h1>Calendário de Eventos</h1>
-<div id="calendar-loading" class="text-center my-3">Carregando eventos...</div>
-<div id="calendar"></div>
-
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="mb-1">Calendário de Eventos</h1>
+        <p class="text-muted mb-0">
+            Confira os próximos eventos da igreja.
+        </p>
+    </div>
+</div>
+<div class="card shadow-sm">
+    <div class="card-body">
+        <div id="calendar-loading" class="text-center my-3">
+            Carregando eventos...
+        </div>
+        <div id="calendar"></div>
+    </div>
+</div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
